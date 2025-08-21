@@ -1,0 +1,24 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+df = pd.read_excel("TemperatureIceCreamSale.xlsx")
+
+df.head()
+
+X = df[["Temperature"]]
+
+y = df[["ice cream sale units"]]
+
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=42)
+
+model = LinearRegression()
+
+model.fit(X_train,y_train)
+
+userTemp = int(input("Enter the temperature you want to find the sell of ice cream : "))
+predictedSale = model.predict([[userTemp]])
+print(f"Their are {predictedSale[0]} number of ice cream sold in temperature {userTemp}")
+
