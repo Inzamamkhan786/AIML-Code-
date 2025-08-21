@@ -1,0 +1,24 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv("HousePrice.csv")
+
+df.head()
+
+X = df[["bedrooms","bathrooms","sqft_living","sqft_lot","floors","yr_built"]]
+y = df[["price"]]
+
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state = 42)
+
+model = LinearRegression()
+
+model.fit(X_train,y_train)
+
+userInput = [[3,2.50,1460,1613,2.0,2007]]
+
+prediction = model.predict(userInput)
+print(f"The price of the input House is = {prediction[0]}")
+
